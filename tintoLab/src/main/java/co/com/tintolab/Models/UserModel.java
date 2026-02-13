@@ -47,6 +47,7 @@ public class UserModel implements UserDetails {
     @Column(nullable = false)
     private boolean active;
 
+    @Column
     @ManyToMany( fetch = FetchType.EAGER, targetEntity = RoleModel.class)
     @JoinTable(name = "users_roles" ,
             joinColumns = @JoinColumn(name = "user_id"),

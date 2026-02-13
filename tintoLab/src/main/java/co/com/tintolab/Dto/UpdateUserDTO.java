@@ -1,6 +1,5 @@
 package co.com.tintolab.Dto;
 
-import co.com.tintolab.Models.RoleModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +11,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-    Long id;
-    String username;
+public class UpdateUserDTO {
     String name;
     String lastname;
     String email;
-    boolean active;
     Set<String> roles;
+
 }
