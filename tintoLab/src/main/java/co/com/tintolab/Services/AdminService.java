@@ -3,8 +3,10 @@ package co.com.tintolab.Services;
 import co.com.tintolab.Dto.UpdateUserDTO;
 import co.com.tintolab.Dto.UserDTO;
 import co.com.tintolab.Models.RoleModel;
+import co.com.tintolab.Models.ShopModel;
 import co.com.tintolab.Models.UserModel;
 import co.com.tintolab.Repository.RoleRepository;
+import co.com.tintolab.Repository.ShopRepository;
 import co.com.tintolab.Repository.UserRepository;
 import co.com.tintolab.Util.RoleName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class AdminService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private ShopRepository shopRepository;
 
 
 
@@ -50,6 +54,7 @@ public class AdminService {
                 .email(user.getEmail())
                 .roles(user.getRoles().stream().map(roleModel -> roleModel.getName().name())
                         .collect(Collectors.toSet()))
+                .shopId(user.getShop() != null ? user.getShop().getId_shop() : null)
                 .build();
     }
 
@@ -58,6 +63,11 @@ public class AdminService {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(()-> new UsernameNotFoundException("Can´t you edit this user because not exist"));
 
+        if(updateUserDTO.getShop_id() != null){
+            ShopModel shop = shopRepository.findById(updateUserDTO.getShop_id())
+                    .orElseThrow(()-> new RuntimeException("Error, this store does not exist"));
+            user.setShop(shop);
+        }
         if(updateUserDTO.getEmail() != null){
             user.setEmail(updateUserDTO.getEmail());
         }

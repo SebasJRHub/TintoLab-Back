@@ -21,4 +21,5 @@ public class RegisterDTO {
     private String email;
     private boolean active;
     private Set<String> roles;
+    private Long shopId;
 }

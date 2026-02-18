@@ -20,4 +20,5 @@ public class UserDTO {
     String email;
     boolean active;
     Set<String> roles;
+    Long shopId;
 }
