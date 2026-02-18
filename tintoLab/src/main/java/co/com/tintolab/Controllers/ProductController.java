@@ -17,8 +17,8 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping()
-    public ResponseEntity<List<ProductModel>> findAll() {
+    @GetMapping("/getProducts")
+    public ResponseEntity<List<ProductModel>> getAllProducts() {
         List<ProductModel> products = productRepository.findAll();
 
         if (products != null && !products.isEmpty()) {
@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductModel> saveOne(@RequestBody @Valid ProductModel product) {
+    public ResponseEntity<ProductModel> saveOneProduct(@RequestBody @Valid ProductModel product) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 productRepository.save(product)
         );

@@ -40,14 +40,15 @@ public class UserModel implements UserDetails {
     @Column(nullable = false)
     private String lastname;
 
-    @Column(nullable = false, length = 150)
+    @Column(nullable = false, length = 150, unique = true)
     @Email
     private String email;
 
     @Column(nullable = false)
-    private boolean active;
+    @Builder.Default
+    private boolean active = true;
 
-    @Column
+
     @ManyToMany( fetch = FetchType.EAGER, targetEntity = RoleModel.class)
     @JoinTable(name = "users_roles" ,
             joinColumns = @JoinColumn(name = "user_id"),
@@ -61,6 +62,10 @@ public class UserModel implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().name()))
                 .collect(Collectors.toSet());
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn( name = "shop_id")
+    private ShopModel shop;
 
     @Override
     public boolean isAccountNonExpired() {
