@@ -26,7 +26,7 @@ public class ProductModel {
     private String description;
     @Column
     @NotBlank
-    private int price;
+    private BigDecimal price;
     @Column
     @NotBlank
     private BigDecimal offer;
@@ -37,4 +37,7 @@ public class ProductModel {
     @Column
     @NotBlank
     private String image;
+    @ManyToOne( fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private CategoryModel category;
 }

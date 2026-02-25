@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class ProductRequestDTO {
     String name;
     String description;
-    Integer price;
+    BigDecimal price;
     BigDecimal offer;
     Integer stock;
     String image;
