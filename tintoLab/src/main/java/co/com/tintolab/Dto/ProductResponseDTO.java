@@ -13,7 +13,7 @@ public class ProductResponseDTO {
     Long id;
     String name;
     String description;
-    int price;
+    BigDecimal price;
     BigDecimal offer;
     int stock;
     String image;
